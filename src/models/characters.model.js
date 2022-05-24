@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js'
+import { Movies } from './movies.model.js';
 
 export const Characters = sequelize.define('characters', {
     id: {
@@ -22,4 +23,15 @@ export const Characters = sequelize.define('characters', {
     history: {
         type: DataTypes.TEXT
     }
+})
+
+//references
+Characters.hasMany(Movies, {
+    foreignKey: 'asociated_characters',
+    sourceKey: 'id'
+})
+
+Movies.belongsTo(Characters, {
+    foreignKey: 'asociated_characters',
+    targetId: 'id'
 })
