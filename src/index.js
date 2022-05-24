@@ -6,6 +6,7 @@ import './models/characters.model.js'
 import './models/movies.model.js'
 import './models/genre.model.js'
 import './models/references.js'
+import './models/user.model.js'
 
 async function main(){
     try {
