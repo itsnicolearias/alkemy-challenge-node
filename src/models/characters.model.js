@@ -26,12 +26,3 @@ export const Characters = sequelize.define('characters', {
 })
 
 //references
-Characters.hasMany(Movies, {
-    foreignKey: 'asociated_characters',
-    sourceKey: 'id'
-})
-
-Movies.belongsTo(Characters, {
-    foreignKey: 'asociated_characters',
-    targetId: 'id'
-})

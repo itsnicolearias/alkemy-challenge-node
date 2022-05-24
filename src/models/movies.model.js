@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js'
 import { Characters } from './characters.model.js';
+import { Genre } from './genre.model.js'
 
 export const Movies = sequelize.define('movies', {
     id: {
@@ -23,12 +24,3 @@ export const Movies = sequelize.define('movies', {
 })
 
 //references
-Movies.hasMany(Characters, {
-    foreignKey: 'asociated_movies',
-    sourceKey: 'id'
-})
-Characters.belongsTo(Movies, {
-    foreignKey: 'asociated_movies',
-    targetId: 'id'
-})
-
