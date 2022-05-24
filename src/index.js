@@ -1,4 +1,16 @@
 import app from './app.js';
+import { enviromentConfig } from './config/environmentConfig.js'
+import { sequelize } from './config/database.js'
 
-app.listen(4000)
-console.log('Server running')
+
+async function main(){
+    try {
+        await sequelize.authenticate()
+        console.log('DB connected')
+        app.listen(enviromentConfig.app.port)
+        console.log('Server running')
+    } catch (error) {
+        console.error(error)
+    }
+}
+main()
