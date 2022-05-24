@@ -51,12 +51,13 @@ export const updateCharacter = async(req, res) => {
     const { id } = req.params;
     
     try {
-        const character = await Characters.findOne({
+        const updatedCharacter = await Characters.findOne({
             where: {id}
         })
-        character.set(req.body)
-        await character.save()
-        res.json(character)
+        updatedCharacter.set(req.body)
+        await updatedCharacter.save()
+        
+        res.json(updatedCharacter)
     } catch (error) {
         res.status(500).json({
             message: error.message,
