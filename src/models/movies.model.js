@@ -24,3 +24,11 @@ export const Movies = sequelize.define('movies', {
 })
 
 //references
+Movies.hasMany(Genre, {
+    foreignKey: 'asociated_movies',
+    sourceKey: 'id'
+})
+Genre.belongsTo(Movies, {
+    foreignKey: 'asociated_movies',
+    targetId: 'id'
+})

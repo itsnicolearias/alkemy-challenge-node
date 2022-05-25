@@ -1,10 +1,12 @@
 import { Movies } from "../models/movies.model.js"
+import { charactersMovies } from "../models/references.js";
 
 export const getAllMovies = async(req, res) => {
     try {
         const movies = await Movies.findAll({
             attributes: ["image", "title", "creation_date"],
         });
+        
         res.json({movies: movies})
     } catch (error) {
         res.status(500).json({
@@ -20,7 +22,12 @@ export const getMovieById = async(req, res) => {
         const movie = await Movies.findOne({
             where: {id}
         })
-        res.json(movie)
+        const characters = await charactersMovies.findAll({
+            where: { MovieId: id},
+            attributes: [ "CharacterId"]
+        })
+        res.json({movie: movie,
+        characters: characters})
     } catch (error) {
         res.status(500).json({
             message: error.message,

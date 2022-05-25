@@ -1,4 +1,5 @@
 import { Characters } from '../models/characters.model.js'
+import { charactersMovies } from '../models/references.js';
 
 
 export const getAllCharacters = async(req, res) => {
@@ -21,7 +22,12 @@ export const getCharacterById = async(req, res) => {
         const character = await Characters.findOne({
             where: {id}
         })
-        res.json(character)
+        const movies = await charactersMovies.findAll({
+            where: { CharacterId: id},
+            attributes: ["MovieId"]
+        })
+        res.json({character: character,
+        movies: movies})
     } catch (error) {
         
     }
