@@ -30,7 +30,7 @@ export const getMovieById = async(req, res) => {
 
 export const createMovie = async(req, res) => {
 
-    const { image, title, creation_date, calification, asociated_characters} = req.body;
+    const { image, title, creation_date, calification, asociated_characters } = req.body;
     try {
         const newMovie = await Movies.create({
             image,

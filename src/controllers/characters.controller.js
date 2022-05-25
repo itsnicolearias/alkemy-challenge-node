@@ -1,5 +1,6 @@
 import { Characters } from '../models/characters.model.js'
 
+
 export const getAllCharacters = async(req, res) => {
     try {
         const characters = await Characters.findAll({

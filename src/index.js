@@ -5,8 +5,9 @@ import { sequelize } from './config/database.js'
 /*import './models/characters.model.js'
 import './models/movies.model.js'
 import './models/genre.model.js'
-import './models/references.js'
-import './models/user.model.js'*/
+
+import './models/user.model.js'
+import './models/references.js'*/
 
 async function main(){
     try {
