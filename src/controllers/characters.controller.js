@@ -33,11 +33,10 @@ export const getAllCharacters = async (req, res) => {
         where: { MovieId: movies },
         attributes: ["CharacterId"],
       });
-      if (!findByMovie) return res.send('Movie not found')
+     
       res.json(findByMovie);
     } 
-    if (!movies) return res.send('Movie not found');
-
+    
     const characters = await Characters.findAll({
       attributes: ["image", "name"],
     });
