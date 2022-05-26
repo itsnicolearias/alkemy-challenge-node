@@ -1,6 +1,8 @@
 import { Movies } from "../models/movies.model.js";
 import { charactersMovies } from "../models/references.js";
 import { Genre } from "../models/genre.model.js";
+import { Op } from "sequelize";
+import { MoviesGenres } from "../models/references.js";
 
 export const getAllMovies = async (req, res) => {
   const { name, genre, order } = req.query;
@@ -8,7 +10,12 @@ export const getAllMovies = async (req, res) => {
   try {
     if (name) {
       const moviesByName = await Movies.findAll({
-        where: { title: name },
+        where: {
+          title: {
+            [Op.in]: [name]
+           }
+         },
+         
         attributes: ["image", "title", "creation_date"],
       });
       return res.json(moviesByName);
@@ -23,9 +30,9 @@ export const getAllMovies = async (req, res) => {
     }
 
     if (genre) {
-      const moviesByGenre = await Genre.findAll({
-        where: { id: genre },
-        attributes: ["name", "asociated_movies"],
+      const moviesByGenre = await MoviesGenres.findAll({
+        where: { GenreId: genre },
+        attributes: ["GenreId", "MovieId"],
       });
       res.json(moviesByGenre);
     }
