@@ -1,7 +1,8 @@
 import { User } from "../models/user.model.js";
 import JWT from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { enviromentConfig } from "../config/environmentConfig.js";
+import { enviromentConfig } from "../config/enviromentConfig.js";
+import { transporter } from "../config/mailer.js";
 
 export const register = async(req, res) => {
     const {name, age, email, password } = req.body;
@@ -27,6 +28,19 @@ export const register = async(req, res) => {
             email: email,
             password: hashedPassword
         })
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: '"DISNEY CHALLENGE" <disneychallenge@gmail.com>', // sender address
+            to: newUser.email, // list of receivers
+            subject: "REGISTRO EN DISNEY PAGE", // Subject line
+            text: "Gracias por registrarte! te damos la bievenida a nuestra pagina", // plain text body
+           
+        });
+
+        console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
         res.json(newUser)
     } catch (error) {
         console.log(error)

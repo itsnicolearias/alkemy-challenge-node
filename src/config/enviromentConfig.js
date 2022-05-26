@@ -5,7 +5,9 @@ const {
     APP_PORT,
     DB_USER,
     DB_PASSWORD,
-    SECRET_TOKEN
+    SECRET_TOKEN,
+    MAIL_USER,
+    MAIL_PASSWORD
 } = process.env;
 
 export const enviromentConfig = {
@@ -19,5 +21,9 @@ export const enviromentConfig = {
     },
     jwt: {
         secret: SECRET_TOKEN
+    },
+    mail: {
+        user: MAIL_USER,
+        password: MAIL_PASSWORD
     }
 }

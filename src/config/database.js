@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import { enviromentConfig } from './environmentConfig.js'
+import { enviromentConfig } from './enviromentConfig.js'
 
 export const sequelize = new Sequelize(
     'disney-challenge',
