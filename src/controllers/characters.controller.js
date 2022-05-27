@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { Characters } from "../models/characters.model.js";
 import { charactersMovies } from "../models/references.js";
 
@@ -6,7 +7,9 @@ export const getAllCharacters = async (req, res) => {
   try {
     if (name) {
       const findByName = await Characters.findAll({
-        where: { name: name },
+        where: {
+          name: { [Op.iLike]: '%'+name+'%' }
+        },
         attributes: ["image", "name"],
       });
       res.json(findByName);

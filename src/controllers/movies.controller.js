@@ -11,10 +11,8 @@ export const getAllMovies = async (req, res) => {
     if (name) {
       const moviesByName = await Movies.findAll({
         where: {
-          title: {
-            [Op.in]: [name]
-           }
-         },
+          title: { [Op.iLike]: '%'+name+'%' }
+            },
          
         attributes: ["image", "title", "creation_date"],
       });
