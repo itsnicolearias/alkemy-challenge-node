@@ -1,3 +1,4 @@
+import { handleHttpError } from "../handlers/handleHttpError.js";
 import { Genre } from "../models/genre.model.js";
 
 export const getAllGenres = async(req, res) => {
@@ -5,9 +6,7 @@ export const getAllGenres = async(req, res) => {
         const genres = await Genre.findAll()
         res.json(genres)
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-          });
+        handleHttpError(error, res)
     }
 }
 
@@ -19,9 +18,7 @@ export const getGenreById = async(req, res) => {
         })
         res.json(genre)
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-          });
+        handleHttpError(error, res)
     }
 }
 
@@ -36,9 +33,7 @@ export const createGenre = async(req, res) => {
         })
         res.json(newGenre)
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-          });
+        handleHttpError(error, res)
     }
 }
 
@@ -54,9 +49,7 @@ export const updateGenre = async(req, res) => {
 
         res.json(updatedGenre)
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-          });
+        handleHttpError(error, res)
     }
 }
 
@@ -69,8 +62,6 @@ export const deleteGenre = async(req, res) => {
         })
         res.sendStatus(204)
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-          });
+        handleHttpError(error, res)
     }
 }

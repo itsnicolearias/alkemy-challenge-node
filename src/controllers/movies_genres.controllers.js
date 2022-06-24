@@ -5,9 +5,7 @@ export const getAllReferences = async(req, res) => {
         const references = await MoviesGenres.findAll()
         res.json(references)
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-          });
+        handleHttpError(error, res)
     }
     
 }
@@ -22,9 +20,7 @@ export const createReference = async(req, res) => {
         })
         res.json(newReference)
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-          });
+        handleHttpError(error, res)
     }
 
 }
@@ -38,9 +34,7 @@ export const deleteReference = async(req, res) => {
         });
         res.sendStatus(204)
     } catch (error) {
-        res.status(500).json({
-            message: error.message,
-          });
+        handleHttpError(error, res)
     }
 
 }

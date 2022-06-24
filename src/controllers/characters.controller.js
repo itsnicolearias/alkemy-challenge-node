@@ -1,4 +1,5 @@
 import { Op } from "sequelize";
+import { handleHttpError } from "../handlers/handleHttpError.js";
 import { Characters } from "../models/characters.model.js";
 import { charactersMovies } from "../models/references.js";
 
@@ -45,9 +46,7 @@ export const getAllCharacters = async (req, res) => {
     });
     res.json({ characters: characters });
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };
 
@@ -62,10 +61,14 @@ export const getCharacterById = async (req, res) => {
       attributes: ["MovieId"],
     });
     res.json({ character: character, movies: movies });
-  } catch (error) {}
+  
+  } catch (error) {
+    handleHttpError(error, res)
+  }
 };
 
 export const createCharacter = async (req, res) => {
+  
   const { image, name, age, weight, history, asociated_movies } = req.body;
 
   try {
@@ -79,9 +82,7 @@ export const createCharacter = async (req, res) => {
     });
     res.json(newCharacter);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };
 
@@ -94,12 +95,10 @@ export const updateCharacter = async (req, res) => {
     });
     updatedCharacter.set(req.body);
     await updatedCharacter.save();
-
     res.json(updatedCharacter);
+
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };
 
@@ -111,11 +110,10 @@ export const deleteCharacter = async (req, res) => {
       where: { id },
     });
     res.sendStatus(204);
+  
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };
 
-export const findByName = async (req, res) => {};
+

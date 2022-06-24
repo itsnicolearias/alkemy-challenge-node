@@ -1,8 +1,8 @@
 import { Movies } from "../models/movies.model.js";
 import { charactersMovies } from "../models/references.js";
-import { Genre } from "../models/genre.model.js";
 import { Op } from "sequelize";
 import { MoviesGenres } from "../models/references.js";
+import { handleHttpError } from "../handlers/handleHttpError.js";
 
 export const getAllMovies = async (req, res) => {
   const { name, genre, order } = req.query;
@@ -40,9 +40,7 @@ export const getAllMovies = async (req, res) => {
     });
     res.json({ movies: movies });
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };
 
@@ -59,9 +57,7 @@ export const getMovieById = async (req, res) => {
     });
     res.json({ movie: movie, characters: characters });
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };
 
@@ -78,9 +74,7 @@ export const createMovie = async (req, res) => {
     });
     res.json(newMovie);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };
 
@@ -96,9 +90,7 @@ export const updateMovie = async (req, res) => {
 
     res.json(updatedMovie);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };
 
@@ -110,8 +102,6 @@ export const deleteMovie = async (req, res) => {
     });
     res.sendStatus(204);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    handleHttpError(error, res)
   }
 };

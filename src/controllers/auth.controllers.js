@@ -3,6 +3,7 @@ import JWT from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { enviromentConfig } from "../config/enviromentConfig.js";
 import { transporter } from "../config/mailer.js";
+import { handleHttpError } from "../handlers/handleHttpError.js";
 
 export const register = async(req, res) => {
     const {name, age, email, password } = req.body;
@@ -43,7 +44,7 @@ export const register = async(req, res) => {
 
         res.json(newUser)
     } catch (error) {
-        console.log(error)
+        handleHttpError(error, res)
     }
 }
 
@@ -79,6 +80,6 @@ export const login = async(req, res) => {
            user: user.email,
            token: token})
     } catch (error) {
-        console.log(error)
+        handleHttpError(error, res)
     }
 }
