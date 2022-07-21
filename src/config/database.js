@@ -1,10 +1,10 @@
 import Sequelize from 'sequelize'
-import { enviromentConfig } from './enviromentConfig.js'
+import { envConfig } from './envConfig.js'
 
 export const sequelize = new Sequelize(
     'disney-challenge',
-    enviromentConfig.db.user,
-    enviromentConfig.db.password,{
+    envConfig.db.user,
+    envConfig.db.password,{
     host: 'localhost',
     dialect: 'postgres'
 })

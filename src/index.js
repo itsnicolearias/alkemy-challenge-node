@@ -1,5 +1,5 @@
 import app from './app.js';
-import { enviromentConfig } from './config/enviromentConfig.js'
+import { envConfig } from './config/envConfig.js';
 import { sequelize } from './config/database.js'
 
 //import models
@@ -13,7 +13,7 @@ async function main(){
     try {
         await sequelize.sync({ alter: true })
         
-        app.listen(enviromentConfig.app.port)
+        app.listen(envConfig.app.port)
         console.log('Server running')
     } catch (error) {
         console.error(error)

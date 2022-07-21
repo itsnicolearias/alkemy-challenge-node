@@ -8,7 +8,7 @@ export const Characters = sequelize.define('characters', {
         primaryKey: true,
         autoIncrement: true
     },
-    image: {
+    image_url: {
         type: DataTypes.STRING
     },
     name: {

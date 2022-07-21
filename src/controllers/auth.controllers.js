@@ -1,7 +1,7 @@
 import { User } from "../models/user.model.js";
 import JWT from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { enviromentConfig } from "../config/enviromentConfig.js";
+import { envConfig } from "../config/envConfig.js";
 import { transporter } from "../config/mailer.js";
 import { handleHttpError } from "../handlers/handleHttpError.js";
 
@@ -73,7 +73,7 @@ export const login = async(req, res) => {
          const token = JWT.sign({
             name: user.name,
             id: user.id
-        }, enviromentConfig.jwt.secret)
+        }, envConfig.jwt.secret)
 
        res.json({
            message: 'Login successfully',

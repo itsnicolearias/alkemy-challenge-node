@@ -1,4 +1,4 @@
-const handleHttpError = (err, res) => {
+ export        const handleHttpError = (err, res) => {
     if (err.name === 'ValidationError') {
       res.status(422).json({
         code: 'VALIDATION_ERROR',
@@ -22,4 +22,4 @@ const handleHttpError = (err, res) => {
     }
   };
   
-  module.exports = { handleHttpError };
+ 

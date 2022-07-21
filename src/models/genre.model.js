@@ -10,7 +10,7 @@ export const Genre = sequelize.define('genre', {
     name: {
         type: DataTypes.STRING
     },
-    image: {
+    image_url: {
         type: DataTypes.STRING
     }
 })
